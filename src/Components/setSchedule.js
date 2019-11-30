@@ -24,6 +24,7 @@ class setSchedule extends Component {
         startMinute: "",
         finishHour: "",
         finishMinute: "",
+        url = "http://10.146.110.246/"
     }
     handleChange = (event) => {
         const { name, value } = event.target
@@ -32,9 +33,9 @@ class setSchedule extends Component {
     handleSubmit = event => {
         event.preventDefault();
         if (this.state.encender) {
-            axios.get("http://10.146.106.215/LED=OFF?")
+            axios.get(this.state.url+"/LED=OFF?")
         } else {
-            axios.get("http://10.146.106.215/LED=ON?")
+            axios.get(this.state.url+"/LED=ON?")
         }
         this.setState({ encender: !this.state.encender })
     };
@@ -46,7 +47,7 @@ class setSchedule extends Component {
         console.log(diferencia);
         
         if (diferencia>0) {
-            axios.get("http://10.146.106.215/HOUR"+diferencia+"?")
+            axios.get(this.state.url+"/HOUR"+diferencia+"?")
             this.setState({startHour:"",startMinute:"",finishHour:"",finishMinute:""})
         } else {
             this.setState({ error: "La hora de inicio no puede ser superior a la fecha de fin" })
